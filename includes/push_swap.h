@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 18:43:49 by minseok2          #+#    #+#             */
-/*   Updated: 2022/11/10 20:00:19 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:00:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,9 @@ void			sort_with_predefined_logic(t_list *list_a, t_list *list_b);
 
 //sort_with_greedy_algorithm.c
 void			copy_numbers_to_array(int **num_array, t_list *list);
-void			set_pivot(int *pivot, t_list *list_a);
+void			set_pivot(int *pivot_num, int *num_array, t_list *list_a);
 void			pb_and_rb(t_list *list_a, t_list *list_b);
-void			divide_list(int *num_array, \
-							int *pivot, t_list *list_a, t_list *list_b);
+void			divide_list(int *pivot_num, t_list *list_a, t_list *list_b);
 void			sort_with_greedy_algorithm(t_list *list_a, t_list *list_b);
 
 //greedy_sort.c
