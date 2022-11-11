@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 12:47:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/11/10 20:01:02 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/11/11 10:59:25 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void	copy_numbers_to_array(int **num_array, t_list *list)
 	}
 }
 
-void	set_pivot(int *pivot, t_list *list_a)
+void	set_pivot_num(int *pivot_num, int *num_array, t_list *list_a)
 {
 	int	i;
+	int	num_array_index;
 	int	part_size;
 	int	remainder;
 
@@ -39,12 +40,13 @@ void	set_pivot(int *pivot, t_list *list_a)
 	while (i < PIVOT_COUNT)
 	{
 		if (i == 0)
-			pivot[i] = part_size - 1;
+			num_array_index = part_size - 1;
 		else
-			pivot[i] = pivot[i - 1] + part_size;
+			num_array_index += part_size;
+		pivot_num[i] = num_array[num_array_index];
 		if (remainder != 0)
 		{
-			pivot[i]++;
+			pivot_num[i]++;
 			remainder--;
 		}
 		i++;
@@ -57,7 +59,7 @@ void	pb_and_rb(t_list *list_a, t_list *list_b)
 	rb(list_b);
 }
 
-void	divide_list(int *num_array, int *pivot, t_list *list_a, t_list *list_b)
+void	divide_list(int *pivot_num, t_list *list_a, t_list *list_b)
 {
 	int					circulate_count;
 	int					p_index;
@@ -71,9 +73,9 @@ void	divide_list(int *num_array, int *pivot, t_list *list_a, t_list *list_b)
 		while (1)
 		{
 			circulate_point.first_num = get_first(list_a);
-			if (circulate_point.first_num <= num_array[pivot[p_index]])
+			if (circulate_point.first_num <= pivot_num[p_index])
 				pb(list_a, list_b);
-			else if (circulate_point.first_num <= num_array[pivot[p_index + 1]])
+			else if (circulate_point.first_num <= pivot_num[p_index + 1])
 				pb_and_rb(list_a, list_b);
 			else
 				ra(list_a);
@@ -89,12 +91,12 @@ void	divide_list(int *num_array, int *pivot, t_list *list_a, t_list *list_b)
 void	sort_with_greedy_algorithm(t_list *list_a, t_list *list_b)
 {
 	int	*num_array;
-	int	pivot[PIVOT_COUNT];
+	int	pivot_num[PIVOT_COUNT];
 
 	copy_numbers_to_array(&num_array, list_a);
 	sort_array(num_array, list_a->size);
-	set_pivot(pivot, list_a);
-	divide_list(num_array, pivot, list_a, list_b);
+	set_pivot_num(pivot_num, num_array, list_a);
 	ft_free(num_array);
+	divide_list(pivot_num, list_a, list_b);
 	greedy_sort(list_a, list_b);
 }
