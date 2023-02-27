@@ -84,7 +84,7 @@ while (list_b->size != 0)
 
 # Compilation
 ```sh
-$ git cone https://github.com/gerry-mandering/push_swap-c.git
+$ git clone https://github.com/gerry-mandering/push_swap-c.git
 $ cd push_swap-c
 $ make all
 ```
